@@ -3,8 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolio } from '../data/portfolio';
 import SocialLinks from '../components/SocialLinks';
-import { SparkLayer } from '../components/HeroAtmosphere';
-import HeroSmoke from '../components/HeroSmoke';
+import HeroAtmosphere3D from '../components/HeroAtmosphere3D';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,8 +80,7 @@ export default function Hero() {
         <div ref={wordRef} className="hero-large-word">HAR</div>
       </div>
 
-      <HeroSmoke />
-      <SparkLayer />
+      <HeroAtmosphere3D />
 
       <div className="hero-section-index" aria-hidden="true">
         <strong>01</strong>
