@@ -1,0 +1,212 @@
+/* ==========================================================================
+   EDUCATION — cinematic horizontal journey
+   Vertical page scroll drives a horizontal card sequence inside a pinned,
+   full-screen scene. See Education.jsx for the scroll → transform mapping.
+   ========================================================================== */
+
+.edu-wrapper {
+  --edu-red: #ff3b3b;
+  --edu-red-dim: #7a1414;
+  --edu-ink: #050303;
+  --edu-card-w: 420px;
+  --edu-card-h: 540px;
+
+  position: relative;
+  height: 420svh;
+  background: var(--edu-ink);
+  color: #f4efe9;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+.edu-wrapper--static {
+  height: auto;
+}
+
+.edu-scene {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 22%, rgba(122, 20, 20, 0.35), transparent 60%),
+    radial-gradient(ellipse 90% 60% at 50% 100%, rgba(90, 10, 10, 0.3), transparent 65%),
+    #050302;
+  perspective: 1700px;
+}
+
+.edu-wrapper--static .edu-scene {
+  position: relative;
+  height: auto;
+  min-height: 100svh;
+  padding: 6rem 0 5rem;
+  perspective: none;
+  overflow: visible;
+}
+
+.edu-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 85%, rgba(200, 30, 30, 0.16), transparent 45%),
+    radial-gradient(circle at 82% 30%, rgba(200, 30, 30, 0.1), transparent 40%);
+  mix-blend-mode: screen;
+}
+
+.edu-heading {
+  position: absolute;
+  top: 12%;
+  left: 4.5%;
+  z-index: 20;
+  max-width: 30rem;
+}
+
+.edu-wrapper--static .edu-heading {
+  position: relative;
+  top: auto;
+  left: auto;
+  padding: 0 5%;
+  margin-bottom: 3rem;
+}
+
+.edu-heading__count {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #6b6b6b;
+  margin: 0 0 0.5rem;
+}
+
+.edu-heading__count-active { color: var(--edu-red); }
+.edu-heading__count-slash { margin: 0 0.4em; opacity: 0.5; }
+
+.edu-heading__title {
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+  color: #f4efe9;
+}
+
+.edu-heading__subtitle {
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9c9c9c;
+  margin: 0 0 1.6rem;
+}
+
+.edu-heading__rule {
+  width: 2px;
+  height: 3.2rem;
+  background: var(--edu-red);
+  margin-bottom: 1.4rem;
+}
+
+.edu-heading__note {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #8a8a8a;
+}
+
+.edu-arc-layer {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  width: 100%;
+  height: 62%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.edu-wrapper--static .edu-arc-layer { display: none; }
+.edu-arc { width: 100%; height: 100%; }
+.edu-arc__dot { fill: var(--edu-red); filter: drop-shadow(0 0 6px rgba(255, 59, 59, 0.9)); }
+.edu-arc__year { fill: #d8d0c8; font-size: 22px; font-weight: 600; letter-spacing: 0.02em; }
+
+.edu-cards {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.edu-wrapper--static .edu-cards {
+  position: relative;
+  inset: auto;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 0 5%;
+}
+
+.edu-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--edu-card-w);
+  height: var(--edu-card-h);
+  background: linear-gradient(180deg, #141010 0%, #0a0808 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), inset 1px 0 0 rgba(255, 70, 70, 0.25), inset -1px 0 0 rgba(255, 70, 70, 0.12);
+  overflow: hidden;
+  will-change: transform, filter;
+  transform-origin: center center;
+}
+
+.edu-wrapper--static .edu-card {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none !important;
+  margin: 0 auto;
+  filter: none !important;
+  opacity: 1 !important;
+  width: min(90vw, 420px);
+}
+
+.edu-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 40px rgba(255, 40, 40, 0.16); pointer-events: none; }
+.edu-card__image { position: relative; height: 58%; width: 100%; background: #1c1414; overflow: hidden; }
+.edu-card__image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.25) contrast(1.05) brightness(0.85); }
+.edu-card__image-fallback { width: 100%; height: 100%; background: linear-gradient(160deg, rgba(255, 70, 70, 0.1), transparent 60%), repeating-linear-gradient(115deg, #201818 0 2px, #170f0f 2px 4px); }
+.edu-card__image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(6, 4, 4, 0.9) 100%); }
+.edu-card__body { position: relative; height: 42%; padding: 1.1rem 1.4rem 1.3rem; display: flex; flex-direction: column; gap: 0.2rem; }
+.edu-card__index { position: absolute; top: -2.6rem; left: 1.4rem; font-size: 0.85rem; font-weight: 700; color: #eee; letter-spacing: 0.05em; }
+.edu-card__year { color: var(--edu-red); font-size: 1.4rem; font-weight: 700; margin: 0 0 0.15rem; }
+.edu-card__title { font-size: 1.25rem; font-weight: 700; line-height: 1.2; margin: 0 0 0.4rem; color: #f4efe9; }
+.edu-card__location { font-size: 0.82rem; color: #a9a9a9; margin: 0 0 0.3rem; }
+.edu-card__location::before { content: "\2609  "; }
+.edu-card__description { font-size: 0.82rem; color: #8e8e8e; margin: 0; }
+.edu-card__note { font-size: 0.75rem; color: #706a6a; margin: 0.3rem 0 0; }
+.edu-card--status { background: linear-gradient(180deg, #120d0d 0%, #070505 100%); }
+.edu-card__status-body { position: relative; height: 100%; padding: 2rem 1.6rem; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.5rem; }
+.edu-card__status-label { color: var(--edu-red); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 0; }
+.edu-card__status-title { font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 800; line-height: 1; margin: 0; color: #f4efe9; }
+.edu-card__status-rule { width: 2.5rem; height: 2px; background: var(--edu-red); margin: 0.3rem 0; }
+.edu-card__status-subtitle { font-size: 0.85rem; letter-spacing: 0.06em; color: #9c9c9c; margin: 0; }
+
+.edu-surface { position: absolute; left: 0; bottom: 0; width: 100%; height: 34%; z-index: 2; transform: perspective(700px) rotateX(58deg); transform-origin: bottom; background: repeating-linear-gradient(90deg, rgba(255, 50, 50, 0.05) 0px, rgba(255, 50, 50, 0.05) 1px, transparent 1px, transparent 90px), radial-gradient(ellipse 60% 100% at 50% 0%, rgba(180, 20, 20, 0.28), transparent 70%), linear-gradient(180deg, #0a0707 0%, #020101 100%); opacity: 0.9; }
+.edu-wrapper--static .edu-surface { display: none; }
+.edu-scroll-indicator { position: absolute; top: 14%; right: 4%; z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 0.9rem; color: #7d7d7d; font-size: 0.7rem; letter-spacing: 0.1em; text-align: center; }
+.edu-wrapper--static .edu-scroll-indicator { display: none; }
+.edu-scroll-indicator__icon { width: 20px; height: 32px; border: 1.5px solid #5c5c5c; border-radius: 12px; position: relative; }
+.edu-scroll-indicator__icon::after { content: ""; position: absolute; top: 6px; left: 50%; width: 3px; height: 6px; background: var(--edu-red); border-radius: 2px; transform: translateX(-50%); }
+.edu-scroll-indicator__line { width: 1px; height: 4rem; background: linear-gradient(180deg, #5c5c5c, transparent); }
+.edu-footnav { position: absolute; bottom: 5%; left: 0; width: 100%; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 0 4.5%; font-size: 0.8rem; letter-spacing: 0.08em; color: #8a8a8a; }
+.edu-wrapper--static .edu-footnav { position: relative; bottom: auto; padding: 3rem 5% 0; }
+.edu-footnav__current, .edu-footnav__next { display: flex; align-items: center; gap: 0.7rem; }
+.edu-footnav__rule { width: 2.4rem; height: 1px; background: #4a4a4a; display: inline-block; }
+.edu-footnav__arrow { display: inline-flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border: 1px solid var(--edu-red); border-radius: 50%; color: var(--edu-red); margin-left: 0.3rem; }
+
+@media (max-width: 1200px) { .edu-wrapper { --edu-card-w: 360px; --edu-card-h: 470px; } }
+@media (max-width: 900px) { .edu-heading__title { font-size: clamp(2.4rem, 10vw, 3.2rem); } .edu-card__status-title { font-size: 2.2rem; } }
+@media (max-width: 480px) { .edu-wrapper { --edu-card-h: 460px; } .edu-scroll-indicator, .edu-arc-layer { display: none; } }
