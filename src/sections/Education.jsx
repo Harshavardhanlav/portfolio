@@ -8,9 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 const milestones = [0, 0.35, 0.7, 1];
 
 const education = [
-  { number: '01', year: '2022', category: 'FOUNDATION', title: 'G.V.M.C High School', location: 'Gandhinagar, Anakapalle', description: 'School Education', image: '/images/education/school.jpg', alt: 'Atmospheric school campus at dusk' },
-  { number: '02', year: '2022 – 2025', category: 'DIPLOMA', title: 'Government Polytechnic, Chodavaram', description: 'Diploma in Computer Science Engineering', image: '/images/education/diploma.jpg', alt: 'Atmospheric polytechnic campus at dusk' },
-  { number: '03', year: '2025 – 2028', category: 'B.TECH', title: "Vignan's Institute of Information Technology", location: 'Duvvada, Visakhapatnam', description: 'B.Tech in Computer Science Engineering', additional: 'Lateral Entry', image: '/images/education/btech.jpg', alt: 'Atmospheric engineering institute campus at dusk' },
+  { number: '01', year: '2022', category: 'FOUNDATION', title: 'G.V.M.C High School', location: 'Gandhinagar, Anakapalle', description: 'School Education', image: '/images/profile/education/education-school.jpg', alt: 'Atmospheric school campus at dusk' },
+  { number: '02', year: '2022 – 2025', category: 'DIPLOMA', title: 'Government Polytechnic, Chodavaram', description: 'Diploma in Computer Science Engineering', image: '/images/profile/education/education-diploma.jpg', alt: 'Atmospheric polytechnic campus at dusk' },
+  { number: '03', year: '2025 – 2028', category: 'B.TECH', title: "Vignan's Institute of Information Technology", location: 'Duvvada, Visakhapatnam', description: 'B.Tech in Computer Science Engineering', additional: 'Lateral Entry', image: '/images/profile/education/education-btech.jpg', alt: 'Atmospheric engineering institute campus at dusk' },
   { number: '04', category: 'CURRENTLY', title: '3RD YEAR', description: 'B.TECH CSE', isStatusCard: true },
 ];
 
