@@ -13,6 +13,9 @@ export function initLenis() {
     touchMultiplier: 1.2,
   });
 
+  const updateScrollTrigger = () => ScrollTrigger.update();
+  lenis.on('scroll', updateScrollTrigger);
+
   let rafId = null;
 
   const raf = (time) => {
@@ -26,6 +29,7 @@ export function initLenis() {
     lenis,
     destroy() {
       cancelAnimationFrame(rafId);
+      lenis.off('scroll', updateScrollTrigger);
       lenis.destroy();
     },
   };

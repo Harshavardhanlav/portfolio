@@ -1,103 +1,94 @@
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import "./About.css";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const aboutCards = [
+const ABOUT_CARDS = [
   {
-    title: 'MY GOAL',
-    text: 'To build impactful products and keep growing as a developer.',
-    icon: <path d="M12 3v3m0 12v3M3 12h3m12 0h3m-4.24-4.24 2.12-2.12M5.12 18.88l2.12-2.12m0-9.76L5.12 4.64m13.76 14.24-2.12-2.12M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />,
+    title: "My Goal",
+    text: "To build impactful products and keep growing as a developer.",
+    icon: "target",
   },
   {
-    title: 'CURRENTLY LEARNING',
-    text: 'DSA, Cloud Computing and advanced web technologies.',
-    icon: <path d="m4 5 8-2 8 2-8 2-8-2Zm0 0v9c0 1.1 3.58 3 8 3s8-1.9 8-3V5m-13 8c-1.88.56-3 1.38-3 2.3C4 17.34 7.58 19 12 19s8-1.66 8-3.7c0-.92-1.12-1.74-3-2.3" />,
+    title: "Currently Learning",
+    text: "DSA, Cloud Computing and advanced web technologies.",
+    icon: "book",
   },
   {
-    title: 'WHAT DRIVES ME',
-    text: 'Solving real problems through technology.',
-    icon: <path d="M9 18h6m-5 3h4m-7.5-7.5a7 7 0 1 1 9 0c-1.16.86-1.5 1.76-1.5 2.5h-6c0-.74-.34-1.64-1.5-2.5ZM12 3v1" />,
+    title: "What Drives Me",
+    text: "Solving real problems through technology.",
+    icon: "idea",
   },
 ];
 
-export default function About() {
-  const sectionRef = useRef(null);
+function CardIcon({ type }) {
+  if (type === "target") {
+    return (
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="14" cy="18" r="9" />
+        <circle cx="14" cy="18" r="4" />
+        <path d="M14 18 25 7M20 7h5v5" />
+      </svg>
+    );
+  }
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const elements = section.querySelectorAll('[data-about-number], [data-about-eyebrow], [data-about-heading], [data-about-line], [data-about-copy], [data-about-card], [data-about-tagline]');
-
-    if (reducedMotion) {
-      gsap.set(elements, { opacity: 1, y: 0, scaleX: 1 });
-      return undefined;
-    }
-
-    const ctx = gsap.context(() => {
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 72%',
-          once: true,
-        },
-      });
-
-      timeline
-        .fromTo('[data-about-number]', { opacity: 1, x: -14 }, { opacity: 1, x: 0, duration: 0.55, ease: 'power2.out' })
-        .fromTo('[data-about-eyebrow]', { opacity: 1, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, '-=0.25')
-        .fromTo('[data-about-heading]', { opacity: 1, y: 24 }, { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' }, '-=0.22')
-        .fromTo('[data-about-line]', { scaleX: 0, transformOrigin: 'left center' }, { scaleX: 1, duration: 0.45, ease: 'power2.out' }, '-=0.26')
-        .fromTo('[data-about-copy]', { opacity: 1, y: 18 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }, '-=0.16')
-        .fromTo('[data-about-card]', { opacity: 1, y: 20 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.1, ease: 'power2.out' }, '-=0.25')
-        .fromTo('[data-about-tagline]', { opacity: 1 }, { opacity: 1, duration: 0.6 }, '-=0.18');
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+  if (type === "book") {
+    return (
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 8c-3-3-7-4-11-3v19c4-1 8 0 11 3M16 8c3-3 7-4 11-3v19c-4-1-8 0-11 3M16 8v19" />
+      </svg>
+    );
+  }
 
   return (
-    <section ref={sectionRef} id="about" className="about-section">
-      <video className="about-video" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M11 22c-2-2-4-4-4-8a9 9 0 0 1 18 0c0 4-2 6-4 8M11 22h10M12 26h8M14 29h4" />
+      <path d="M16 2V0M5 6 3 4M27 6l2-2M4 16H1M31 16h-3" />
+    </svg>
+  );
+}
+
+export default function About({ id = "about", className = "", nextHref = "#education", onNext }) {
+  const rootClassName = `about-section${className ? ` ${className}` : ""}`;
+
+  return (
+    <section id={id} className={rootClassName} aria-labelledby={`${id}-title`}>
+      <video className="about-section__video" autoPlay muted loop playsInline preload="metadata" aria-hidden="true" tabIndex={-1}>
         <source src="/videos/about.mp4" type="video/mp4" />
       </video>
-      <div className="about-video-overlay" aria-hidden="true" />
+      <div className="about-section__atmosphere" aria-hidden="true" />
 
-      <div className="about-section-index" data-about-number aria-hidden="true">
-        <strong>02</strong>
-        <span />
-        <small>/ 06</small>
-      </div>
+      <div className="about-section__layout">
+        <aside className="about-section__index" aria-label="Section 2 of 6">
+          <p className="about-section__count"><span className="about-section__count-current">02</span><span className="about-section__count-total">/ 06</span></p>
+          <span className="about-section__index-line" aria-hidden="true" />
+          <span className="about-section__index-slug" aria-hidden="true">/ 06</span>
+        </aside>
 
-      <div className="about-content">
-        <div className="about-copy-column">
-          <p className="about-eyebrow" data-about-eyebrow>ABOUT ME</p>
-          <h2 data-about-heading><span>MORE THAN</span><em>JUST CODE</em></h2>
-          <span className="about-accent-line" data-about-line aria-hidden="true" />
-          <div className="about-copy">
-            <p data-about-copy>
-              I&apos;m Harsha, a passionate developer and a curious learner who loves building real-world solutions through technology. My journey started with a simple interest in how websites and applications work, and it has grown into a deep passion for creating meaningful digital experiences.
-            </p>
-            <p data-about-copy>
-              I completed my Diploma in Computer Engineering (CME), and now I&apos;m pursuing B.Tech in Computer Science and Engineering because it gives me the freedom to explore different areas of technology. I&apos;m currently focused on strengthening my problem-solving skills through DSA, learning Cloud Computing, and building full-stack projects that solve real-world problems.
-            </p>
+        <div className="about-section__content">
+          <p className="about-section__eyebrow">About Me</p>
+          <h2 id={`${id}-title`} className="about-section__title"><span className="about-section__title-line">More Than</span><span className="about-section__title-line about-section__title-line--accent">Just Code</span></h2>
+          <hr className="about-section__rule" />
+          <div className="about-section__copy">
+            <p>From Harsha, a passionate developer and curious learner who loves building real-world solutions through technology. My journey started with a simple interest in how websites and applications work, and it has grown into a deep passion for creating meaningful digital experiences.</p>
+            <p>I completed my Diploma in Computer Engineering (CME), and now I&apos;m pursuing B.Tech in Computer Science and Engineering because it gives me the freedom to explore different areas of technology. I&apos;m currently focused on strengthening my problem-solving skills through DSA, learning Cloud Computing, and building full-stack projects that solve real-world problems.</p>
           </div>
         </div>
 
-        <div className="about-cards" aria-label="About me highlights">
-          {aboutCards.map((card) => (
-            <article className="about-card" data-about-card key={card.title}>
-              <svg className="about-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                {card.icon}
-              </svg>
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
+        <div className="about-section__cards" aria-label="About highlights">
+          {ABOUT_CARDS.map((card) => (
+            <article className="about-section__card" key={card.title}>
+              <div className="about-section__card-icon"><CardIcon type={card.icon} /></div>
+              <h3 className="about-section__card-title">{card.title}</h3>
+              <p className="about-section__card-text">{card.text}</p>
             </article>
           ))}
         </div>
 
-        <p className="about-tagline" data-about-tagline>SAME CURIOSITY. HIGHER GOALS.</p>
+        <footer className="about-section__footer">
+          <p className="about-section__tagline">Same curiosity. Higher goals.</p>
+          <nav className="about-section__nav" aria-label="Portfolio sections">
+            <span className="about-section__nav-current"><strong>02</strong> About</span>
+            <a className="about-section__nav-next" href={nextHref} onClick={onNext}>Next — Education <span className="about-section__nav-arrow" aria-hidden="true">→</span></a>
+          </nav>
+        </footer>
       </div>
     </section>
   );

@@ -36,7 +36,7 @@
 .education__atmosphere { position: absolute; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
 .education__bloom { position: absolute; width: 58%; height: 45%; left: 26%; top: 24%; background: radial-gradient(ellipse, color-mix(in oklab, var(--primary) 24%, transparent), transparent 68%); filter: blur(36px); }
 .education__haze { position: absolute; left: 8%; right: 3%; bottom: 23%; height: 20%; background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--foreground) 5%, transparent), color-mix(in oklab, var(--primary) 7%, transparent), transparent); filter: blur(28px); opacity: .65; }
-.education__atmosphere i { position: absolute; left: calc(7% + (var(--particle) * 5.6%)); top: calc(24% + (var(--particle) % 6) * 8%); width: 2px; height: 2px; border-radius: 50%; background: var(--foreground); opacity: calc(.03 + (var(--particle) % 3) * .02); box-shadow: 0 0 7px var(--primary); }
+.education__atmosphere i { position: absolute; left: calc(7% + (var(--particle) * 5.6%)); top: calc(24% + (var(--particle) * 4.5%)); width: 2px; height: 2px; border-radius: 50%; background: var(--foreground); opacity: .06; box-shadow: 0 0 7px var(--primary); }
 .education__heading { position: absolute; z-index: 30; left: clamp(24px, 3.2vw, 58px); top: clamp(70px, 12vh, 112px); pointer-events: none; }
 .education__counter { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; color: var(--muted-foreground); font: 600 clamp(18px, 2vw, 29px)/1 var(--font-display); }
 .education__counter strong { color: var(--primary); font-size: 1.15em; }

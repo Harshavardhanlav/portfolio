@@ -13,6 +13,8 @@ import Contact from './sections/Contact';
 import { initLenis } from './animations/gsapSetup';
 import { useScrollAnimations } from './animations/scrollAnimations';
 import './App.css';
+import './sections/Hero.css';
+import './sections/About.css';
 
 function App() {
   useScrollAnimations();

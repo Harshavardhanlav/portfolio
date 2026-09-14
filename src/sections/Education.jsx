@@ -96,9 +96,27 @@ export default function Education() {
       onUpdate: (self) => renderProgress(self.progress),
     });
 
-    const onResize = () => renderProgress(trigger.progress);
+    let scrollFrame = 0;
+    const renderFromScroll = () => {
+      scrollFrame = 0;
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      const scrollRange = Math.max(section.offsetHeight - window.innerHeight, 1);
+      renderProgress((window.scrollY - sectionTop) / scrollRange);
+    };
+    const onScroll = () => {
+      if (!scrollFrame) scrollFrame = window.requestAnimationFrame(renderFromScroll);
+    };
+    const onResize = () => {
+      ScrollTrigger.refresh();
+      renderFromScroll();
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
+    renderFromScroll();
     return () => {
+      window.cancelAnimationFrame(scrollFrame);
+      window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
       trigger.kill();
     };
