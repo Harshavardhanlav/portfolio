@@ -237,3 +237,185 @@
     min-height: 0 !important;
   }
 }
+
+/* Responsive portrait and type corrections; desktop rules above 1180px stay unchanged. */
+@media (min-width: 1040px) and (max-width: 1180px) {
+  .hero-section__portrait-wrap {
+    left: -7%;
+    bottom: -16%;
+    width: min(72vw, 820px);
+    height: 132%;
+  }
+
+  .hero-section__content {
+    right: clamp(2rem, 4vw, 3.8rem);
+    width: min(46vw, 540px);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1039px) {
+  .hero-section {
+    display: block;
+    min-height: calc(100svh - 80px) !important;
+    padding: clamp(4.5rem, 9vh, 6rem) clamp(2.5rem, 7vw, 5rem) 3.5rem !important;
+  }
+
+  .hero-section__content {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(100%, 36rem);
+    margin: 0;
+    padding: 0;
+    transform: none;
+  }
+
+  .hero-section__eyebrow {
+    margin-bottom: 0.75rem;
+    font-size: clamp(0.5rem, 0.85vw, 0.62rem);
+  }
+
+  .hero-section__heading span {
+    font-size: clamp(2rem, 5.4vw, 3.5rem);
+  }
+
+  .hero-section__heading strong {
+    font-size: clamp(3rem, 8.2vw, 5.7rem);
+  }
+
+  .hero-section__role {
+    margin-top: 1rem;
+    font-size: clamp(0.78rem, 1.3vw, 1rem);
+  }
+
+  .hero-section__description {
+    max-width: min(100%, 30rem);
+    margin-top: 0.6rem;
+    font-size: clamp(0.75rem, 1.08vw, 0.92rem);
+    line-height: 1.7;
+  }
+
+  .hero-section__actions {
+    gap: 0.55rem;
+    margin-top: 1.2rem;
+  }
+
+  .hero-section__button {
+    min-height: 2.7rem;
+    padding: 0.65rem 1.05rem;
+    font-size: clamp(0.58rem, 0.78vw, 0.66rem);
+  }
+
+  .hero-section__socials {
+    gap: 0.4rem;
+    margin-top: 0.8rem;
+  }
+
+  .hero-section__socials a {
+    min-height: 1.95rem;
+    padding: 0.34rem 0.56rem;
+    font-size: 0.49rem;
+  }
+
+  .hero-section__portrait-wrap {
+    z-index: 5;
+    right: -22%;
+    left: auto;
+    bottom: -16%;
+    width: min(88vw, 790px);
+    height: 126%;
+    opacity: 0.86;
+  }
+
+  .hero-section__index {
+    top: 45%;
+    left: 1.2rem;
+  }
+
+  .hero-section__scroll,
+  .hero-section__technical {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-section {
+    min-height: max(680px, calc(100svh - 80px)) !important;
+    height: max(680px, calc(100svh - 80px)) !important;
+    padding: 4.5rem clamp(20px, 6vw, 28px) 4rem !important;
+  }
+
+  .hero-section__content {
+    width: 100%;
+  }
+
+  .hero-section__eyebrow {
+    max-width: 100%;
+    margin-bottom: 0.65rem;
+    font-size: clamp(0.48rem, 1.9vw, 0.58rem);
+  }
+
+  .hero-section__heading span {
+    font-size: clamp(1.9rem, 9vw, 2.9rem);
+  }
+
+  .hero-section__heading strong {
+    font-size: clamp(3rem, 16vw, 5.2rem);
+  }
+
+  .hero-section__role {
+    margin-top: 0.9rem;
+    font-size: clamp(0.72rem, 3vw, 0.88rem);
+  }
+
+  .hero-section__description {
+    max-width: 100%;
+    margin-top: 0.5rem;
+    font-size: clamp(0.7rem, 2.8vw, 0.82rem);
+    line-height: 1.65;
+  }
+
+  .hero-section__actions {
+    width: 100%;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .hero-section__button {
+    min-height: 2.55rem;
+    padding: 0.6rem clamp(0.65rem, 3vw, 0.9rem);
+    font-size: clamp(0.52rem, 2.1vw, 0.6rem);
+  }
+
+  .hero-section__socials {
+    gap: 0.35rem;
+    margin-top: 0.7rem;
+  }
+
+  .hero-section__socials a {
+    min-height: 1.9rem;
+    padding: 0.32rem 0.52rem;
+    font-size: 0.47rem;
+  }
+
+  .hero-section__portrait-wrap {
+    right: -38%;
+    bottom: -17%;
+    width: 164vw;
+    height: 94%;
+    opacity: 0.8;
+  }
+
+  .hero-section__index {
+    right: clamp(20px, 6vw, 28px);
+    bottom: 3rem;
+  }
+
+  .hero-section__corner--top {
+    left: clamp(20px, 6vw, 28px);
+  }
+
+  .hero-section__corner--bottom {
+    right: clamp(20px, 6vw, 28px);
+  }
+}

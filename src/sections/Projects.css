@@ -220,16 +220,12 @@
   top: clamp(130px, 18%, 170px);
   right: clamp(22px, 2.7vw, 46px);
   width: clamp(278px, 24vw, 376px);
-  max-height: calc(100% - 245px);
   padding: clamp(20px, 2vw, 30px);
-  overflow: auto;
   border: 1px solid rgba(255, 24, 56, 0.65);
   border-radius: 3px;
   background: var(--projects-panel);
   box-shadow: 0 0 32px rgba(0, 0, 0, 0.8), inset 0 0 32px rgba(255, 24, 56, 0.035);
   animation: projects-panel-in 520ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
-  scrollbar-color: var(--projects-red-dark) transparent;
-  scrollbar-width: thin;
 }
 
 .projects__panel::before,
@@ -356,6 +352,10 @@
   margin-top: 18px;
 }
 
+.projects__actions--live-only {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .projects__action {
   display: inline-flex;
   min-height: 40px;
@@ -382,6 +382,41 @@
   box-shadow: 0 0 18px var(--projects-glow);
   outline: none;
   transform: translateY(-2px);
+}
+
+.projects__testing {
+  margin-top: 16px;
+  padding: 12px 13px;
+  border-left: 2px solid var(--projects-red);
+  background: rgba(255, 24, 56, 0.045);
+}
+
+.projects__testing h4 {
+  margin: 0 0 8px;
+  color: var(--projects-red);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.projects__testing p {
+  margin: 3px 0 0;
+  color: #d4d1d5;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 11px;
+}
+
+.projects__testing p span {
+  color: var(--projects-muted);
+}
+
+.projects__testing small {
+  display: block;
+  margin-top: 9px;
+  color: var(--projects-muted);
+  font-family: "Segoe UI", sans-serif;
+  font-size: 10px;
+  line-height: 1.45;
 }
 
 .projects__controls {

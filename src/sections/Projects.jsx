@@ -19,7 +19,7 @@ const projects = [
       "A responsive React-based Pokémon exploration website that fetches Pokémon data from an external API and allows users to search, explore, and view detailed information including statistics, moves, types, weaknesses, and resistances.",
     technologies: ["React.js", "CSS3", "Pokémon API", "React Hooks"],
     features: ["Pokémon listing", "Search and filtering", "Pokémon details", "Statistics", "Moves", "Types", "Weaknesses and resistances", "Loading animation", "Responsive design"],
-    liveDemo: "",
+    liveUrl: "https://pokemon-eight-ruddy-54.vercel.app/",
     github: "",
   },
   {
@@ -32,7 +32,7 @@ const projects = [
       "A personal finance management platform for tracking income and expenses, managing budgets, analyzing spending, generating reports, and managing personal financial data securely.",
     technologies: ["React", "JavaScript", "Node.js", "Express.js", "MongoDB", "JWT", "HTML", "CSS"],
     features: ["Registration and login", "Email verification", "Forgot/reset password", "JWT authentication", "Income and expense tracking", "Categories", "Payment methods", "Budgets", "Dashboard", "Analytics", "Reports", "Data export", "Settings", "Currency management"],
-    liveDemo: "",
+    liveUrl: "https://spendwise-two-rosy.vercel.app/",
     github: "",
   },
   {
@@ -45,7 +45,8 @@ const projects = [
       "A school management system designed to streamline school operations through separate admin and teacher portals, attendance management, geofencing, tasks, notices, academic calendar management, and reporting.",
     technologies: ["React", "Vite", "JavaScript", "CSS", "Node.js", "Express.js", "MongoDB", "MongoDB Atlas", "Browser Geolocation / Geofencing"],
     features: ["Admin portal", "Teacher portal", "Role-based access", "Teacher management", "Location-based attendance", "Geofencing", "Automatic absence cutoff", "Attendance history", "Reports", "Task tracking", "Notices", "Academic calendar", "Responsive interface"],
-    liveDemo: "",
+    liveUrl: "https://project-nexus-eta-six.vercel.app/",
+    testingCredentials: { username: "TCH106", password: "12345" },
     github: "",
   },
   {
@@ -59,19 +60,32 @@ const projects = [
       "An AI-powered career guidance platform that analyzes a user's resume and provides personalized career recommendations, skill-gap analysis, learning resources, job and salary guidance, and a step-by-step career roadmap.",
     technologies: ["React.js", "Vite", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "Google Gemini API", "Multer", "PDF text extraction", "Jest", "Supertest", "Docker"],
     features: ["Resume analysis", "Career recommendations", "Job-role recommendations", "Skill-gap analysis", "Personalized career roadmap", "Learning resources", "Mock-test resources", "Job and salary guidance", "Personalized dashboard", "Authentication", "Google authentication", "Charts and data visualization"],
-    liveDemo: "",
+    liveUrl: "https://dti-project-iota.vercel.app/",
     github: "",
   },
 ];
 
 function ProjectActions({ project }) {
-  if (!project.liveDemo && !project.github) return null;
+  if (!project.liveUrl && !project.github) return null;
 
   return (
-    <div className="projects__actions">
-      {project.liveDemo && <a href={project.liveDemo} target="_blank" rel="noreferrer" className="projects__action projects__action--primary"><span aria-hidden="true">↗</span> Live demo</a>}
-      {project.github && <a href={project.github} target="_blank" rel="noreferrer" className="projects__action"><span aria-hidden="true">⌘</span> GitHub</a>}
+    <div className={`projects__actions${project.liveUrl && !project.github ? " projects__actions--live-only" : ""}`}>
+      {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="projects__action projects__action--primary"><span aria-hidden="true">↗</span> View live project</a>}
+      {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className="projects__action"><span aria-hidden="true">⌘</span> GitHub</a>}
     </div>
+  );
+}
+
+function ProjectTestingCredentials({ project }) {
+  if (!project.testingCredentials) return null;
+
+  return (
+    <aside className="projects__testing" aria-label="NEXUS test account">
+      <h4>TEST ACCOUNT</h4>
+      <p><span>Username:</span> {project.testingCredentials.username}</p>
+      <p><span>Password:</span> {project.testingCredentials.password}</p>
+      <small>Use the teacher account to test the deployed system.</small>
+    </aside>
   );
 }
 
@@ -106,10 +120,10 @@ export default function Projects() {
         <div className="projects__shade" aria-hidden="true" />
         <header className="projects__heading"><div className="projects__section-index"><strong>06</strong><span>/ 06</span></div><div className="projects__heading-copy"><p>Selected work</p><h2 id="projects-title">Projects</h2><span>Ideas engineered into useful products.</span></div></header>
         <nav className="projects__rail" aria-label="Choose a project">{projects.map((project, index) => <button key={project.number} type="button" onClick={() => selectProject(index)} className={`projects__rail-item${activeIndex === index ? " is-active" : ""}`} aria-pressed={activeIndex === index}><span>{project.number}</span><span><strong>{project.shortTitle}</strong><small>{project.type}</small></span></button>)}</nav>
-        <article key={`details-${transitionKey}`} className="projects__panel"><div className="projects__panel-topline"><span>Project_{activeProject.number}</span><span className="projects__status">Featured</span></div><h3>{activeProject.title}</h3>{activeProject.subtitle && <p className="projects__subtitle">{activeProject.subtitle}</p>}<p className="projects__type">{activeProject.type}</p><p className="projects__description">{activeProject.description}</p><div className="projects__technology-list" aria-label="Technologies">{activeProject.technologies.map((technology, index) => <span key={technology} style={{ "--reveal-order": index }}>{technology}</span>)}</div><div className="projects__feature-list" aria-label="Project features">{activeProject.features.slice(0, 7).map((feature) => <span key={feature}>{feature}</span>)}</div><ProjectActions project={activeProject} /></article>
+        <article key={`details-${transitionKey}`} className="projects__panel"><div className="projects__panel-topline"><span>Project_{activeProject.number}</span><span className="projects__status">Featured</span></div><h3>{activeProject.title}</h3>{activeProject.subtitle && <p className="projects__subtitle">{activeProject.subtitle}</p>}<p className="projects__type">{activeProject.type}</p><p className="projects__description">{activeProject.description}</p><div className="projects__technology-list" aria-label="Technologies">{activeProject.technologies.map((technology, index) => <span key={technology} style={{ "--reveal-order": index }}>{technology}</span>)}</div><div className="projects__feature-list" aria-label="Project features">{activeProject.features.slice(0, 7).map((feature) => <span key={feature}>{feature}</span>)}</div><ProjectActions project={activeProject} /><ProjectTestingCredentials project={activeProject} /></article>
         <div className="projects__controls"><button type="button" onClick={() => moveProject(-1)} aria-label="Show previous project"><span aria-hidden="true">←</span><span><small>Previous</small>{projects[(activeIndex - 1 + projects.length) % projects.length].shortTitle}</span></button><div className="projects__progress" aria-label={`Project ${activeIndex + 1} of ${projects.length}`}>{projects.map((project, index) => <button key={project.number} type="button" className={activeIndex === index ? "is-active" : ""} onClick={() => selectProject(index)} aria-label={`Show ${project.title}`} />)}</div><button type="button" onClick={() => moveProject(1)} aria-label="Show next project"><span><small>Next</small>{projects[(activeIndex + 1) % projects.length].shortTitle}</span><span aria-hidden="true">→</span></button></div>
       </div>
-      <div className="projects__mobile"><header className="projects__mobile-heading"><p>Selected work</p><h2>Projects</h2></header><div className="projects__mobile-list">{projects.map((project) => <article className="projects__mobile-project" key={project.number}><div className="projects__mobile-title"><span>Project {project.number}</span><h3>{project.title}</h3></div><div className="projects__mobile-image"><img src={project.image} alt={`${project.title} project displayed on a laptop`} loading="lazy" /></div>{project.subtitle && <p className="projects__subtitle">{project.subtitle}</p>}<p className="projects__type">{project.type}</p><p className="projects__description">{project.description}</p><div className="projects__mobile-group"><h4>Technologies</h4><div className="projects__technology-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div></div><div className="projects__mobile-group"><h4>Features</h4><ul>{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul></div><ProjectActions project={project} /></article>)}</div></div>
+      <div className="projects__mobile"><header className="projects__mobile-heading"><p>Selected work</p><h2>Projects</h2></header><div className="projects__mobile-list">{projects.map((project) => <article className="projects__mobile-project" key={project.number}><div className="projects__mobile-title"><span>Project {project.number}</span><h3>{project.title}</h3></div><div className="projects__mobile-image"><img src={project.image} alt={`${project.title} project displayed on a laptop`} loading="lazy" /></div>{project.subtitle && <p className="projects__subtitle">{project.subtitle}</p>}<p className="projects__type">{project.type}</p><p className="projects__description">{project.description}</p><div className="projects__mobile-group"><h4>Technologies</h4><div className="projects__technology-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div></div><div className="projects__mobile-group"><h4>Features</h4><ul>{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul></div><ProjectActions project={project} /><ProjectTestingCredentials project={project} /></article>)}</div></div>
     </section>
   );
 }

@@ -7,7 +7,7 @@ import Education from './sections/Education';
 import Experience from './sections/Experience';
 import Skills from './sections/Skills';
 import Projects from './sections/Projects';
-import Achievements from './sections/Achievements';
+import Certificates from './sections/Certificates';
 import Resume from './sections/Resume';
 import Contact from './sections/Contact';
 import { initLenis } from './animations/gsapSetup';
@@ -37,7 +37,7 @@ function App() {
         <Experience />
         <Skills />
         <Projects />
-        <Achievements />
+        <Certificates />
         <Resume />
         <Contact />
       </main>
